@@ -7,7 +7,7 @@ export LD_LIBRARY_PATH=$PREFIX/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 export PATH=$PREFIX/bin${PATH:+:$PATH}
 tar -jxf ../libgettextdemo-0.1.tar.bz2
 cd libgettextdemo-0.1
-./configure --prefix=$PREFIX
+./configure --prefix=$PREFIX --includedir=$PREFIX/include --libdir=$PREFIX/lib --datadir=$PREFIX/share
 make install
 cd ..
 touch README
@@ -21,7 +21,7 @@ cd m4
 touch ChangeLog
 echo "EXTRA_DIST =" *.m4 >Makefile.am
 cd ..
-./autogen.sh --prefix=$PREFIX
+./autogen.sh --prefix=$PREFIX --includedir=$PREFIX/include --libdir=$PREFIX/lib --datadir=$PREFIX/share
 make
 make install
 # This updates po files (useful before release).
