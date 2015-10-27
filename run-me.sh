@@ -5,11 +5,14 @@ PREFIX=$PWD/RUNTEST
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}
 export LD_LIBRARY_PATH=$PREFIX/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 export PATH=$PREFIX/bin${PATH:+:$PATH}
-tar -jxf ../libgettextdemo-0.1.tar.bz2
-cd libgettextdemo-0.1
-./configure --prefix=$PREFIX --includedir=$PREFIX/include --libdir=$PREFIX/lib --datadir=$PREFIX/share
-make install
-cd ..
+if ! test -f RUNTEST/include/libgettextdemo.h ; then
+	git clone https://github.com/stanislav-brabec/libgettextdemo.git
+	cd libgettextdemo
+	./autogen.sh --prefix=$PREFIX --includedir=$PREFIX/include --libdir=$PREFIX/lib --datadir=$PREFIX/share
+	make install
+	cd ..
+	rm -rf libgettextdemo
+fi
 touch README
 touch NEWS
 touch AUTHORS
